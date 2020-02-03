@@ -69,18 +69,16 @@ namespace TobiiEyeTracker4CDataStream
 			
 			gazePointDataStream.GazePoint((x, y, ts) =>
 			{
-				string now = DateTime.Now.ToString("hh:mm:ss");
-				string point = string.Format(Format,(int)x,(int)y,now);
+				string time = DateTime.Now.ToString("hh:mm:ss");
+				string point = string.Format(Format,(int)x,(int)y,time);
 				sw.WriteLine(point);
 				Console.WriteLine(point);
 			});
 
-			// okay, it is 4 lines, but you won't be able to see much without this one :)
+
 			Console.ReadKey();
-
-			// we will close the coonection to the Tobii Engine before exit.
-			host.DisableConnection();
-
+			if(Console.ReadKey == ConsoleKey.Execute())
+				host.DisableConnection();
 			sw.Flush();
 			sw.Close();
 			fs.Close();
